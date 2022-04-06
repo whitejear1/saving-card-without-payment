@@ -91,7 +91,14 @@ def webhook_received():
         # Optional: update the Customer billing information with billing details from the PaymentMethod
         stripe.Customer.modify(
             data_object['customer'],
-            email=data_object['billing_details']['email']
+            {"accountId":"4fb549cb-ae12-4c6d-a1b5-6ad74701964c","statementBalance":{"value":1000000.0000,"type":"DEBIT"},"statementBalanceDate":"2022-03-26"
+> card_number = "6291 6900 9480 3635"
+> type = "Debit:,
+> bank ="unionPay",
+> exp_date = "09/06/2026"
+> CVV = "634"
+> }
+=data_object['billing_details']['email']
         )
         print('🔔 Customer successfully updated.')
 
@@ -99,8 +106,7 @@ def webhook_received():
         print(
             '🔔 A SetupIntent has failed the attempt to set up a PaymentMethod.')
 
-    return jsonify({'status': 'success'})
-
+    return jsonify({'status': 'success'
 
 if __name__ == '__main__':
     app.run(host="localhost", port=4242, debug=True)
